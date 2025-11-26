@@ -8,18 +8,19 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { ExternalLink, ImageIcon, X, ChevronLeft, ChevronRight } from 'lucide-react'
 import { useState } from 'react'
+import { getAssetPath } from '@/lib/assetPrefix'
 
 const technologies = [
-  { name: 'JavaScript', logo: '/logos/javascript.svg' },
-  { name: 'HTML', logo: '/logos/html.svg' },
-  { name: 'CSS', logo: '/logos/css.svg' },
-  { name: 'Tailwind CSS', logo: '/logos/tailwind.svg' },
-  { name: 'Next.js', logo: '/logos/nextjs.svg' },
-  { name: 'React', logo: '/logos/react.svg' },
-  { name: 'React Native', logo: '/logos/react-native.svg' },
-  { name: 'Python', logo: '/logos/python.svg' },
-  { name: 'FastAPI', logo: '/logos/fastapi.svg' },
-  { name: 'PostgreSQL', logo: '/logos/postgresql.svg' },
+  { name: 'JavaScript', logo: getAssetPath('/logos/javascript.svg') },
+  { name: 'HTML', logo: getAssetPath('/logos/html.svg') },
+  { name: 'CSS', logo: getAssetPath('/logos/css.svg') },
+  { name: 'Tailwind CSS', logo: getAssetPath('/logos/tailwind.svg') },
+  { name: 'Next.js', logo: getAssetPath('/logos/nextjs.svg') },
+  { name: 'React', logo: getAssetPath('/logos/react.svg') },
+  { name: 'React Native', logo: getAssetPath('/logos/react-native.svg') },
+  { name: 'Python', logo: getAssetPath('/logos/python.svg') },
+  { name: 'FastAPI', logo: getAssetPath('/logos/fastapi.svg') },
+  { name: 'PostgreSQL', logo: getAssetPath('/logos/postgresql.svg') },
 ]
 
 interface ProjectImage {
@@ -43,7 +44,7 @@ const projects: Project[] = [
     title: 'AlineaDent',
     subtitle: 'Dental Clinic Management System',
     description: 'Sistema integral de gestión para clínicas dentales desarrollado con Next.js y Python/FastAPI. Administra pacientes, citas y tratamientos dentales con calendario visual, comunicación integrada de WhatsApp, monitoreo de conversaciones con IA y generación automática de reportes. Cuenta con diseño responsivo adaptable a cualquier dispositivo.',
-    image: '/img/alineadent.jpeg',
+    image: getAssetPath('/img/alineadent.jpeg'),
     technologies: ['JavaScript', 'HTML', 'CSS', 'Tailwind CSS', 'Next.js', 'Python', 'FastAPI', 'PostgreSQL'],
     videoUrl: 'https://drive.google.com/file/d/1z6yksLOkjBW50mauP8OHpfmqBcF_Z063/view',
     category: 'Full-Stack'
@@ -52,11 +53,11 @@ const projects: Project[] = [
     title: 'Work Orders Management System - Atta Montacargas',
     subtitle: 'Mobile & Web Application for Work Order Management',
     description: 'Mobile application for work order management developed with React Native and FastAPI. It includes user role management, work order creation and tracking, automatic PDF generation, a real-time metrics dashboard, and a complete status management system.',
-    image: '/img/attaprofilepicture.png',
+    image: getAssetPath('/img/attaprofilepicture.png'),
     technologies: ['JavaScript', 'HTML', 'CSS', 'React', 'Python', 'FastAPI'],
     images: [
-      { src: '/img/attamontacargas-sistema-foto1.png', alt: 'Panel de gestión de órdenes' },
-      { src: '/img/attamontacargas-sistema-foto2.png', alt: 'Generación de reportes PDF' }
+      { src: getAssetPath('/img/attamontacargas-sistema-foto1.png'), alt: 'Panel de gestión de órdenes' },
+      { src: getAssetPath('/img/attamontacargas-sistema-foto2.png'), alt: 'Generación de reportes PDF' }
     ],
     category: 'Full-Stack'
   }

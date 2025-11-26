@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Github, Mail, FileText } from 'lucide-react'
 import { toast } from 'sonner'
+import { getAssetPath } from '@/lib/assetPrefix'
 
 export default function Hero() {
   const copyEmail = async () => {
@@ -39,7 +40,7 @@ export default function Hero() {
         >
           <div className="relative w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 mx-auto rounded-full overflow-hidden ring-4 ring-primary/20 shadow-glow-purple transition-all duration-300 hover:ring-purple-500/50 hover:shadow-2xl hover:shadow-purple-500/30">
             <Image
-              src="/profile_picture.jpeg"
+              src={getAssetPath("/profile_picture.jpeg")}
               alt="Andrés Romero"
               fill
               className="object-cover"
