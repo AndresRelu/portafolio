@@ -155,8 +155,9 @@ export default function Hero() {
               className="w-full sm:w-auto border-2 border-blue-500/50 bg-blue-500/10 hover:bg-blue-500/20 text-white backdrop-blur-sm shadow-lg shadow-blue-500/20 hover:shadow-blue-500/40 transition-all text-base md:text-lg px-6 md:px-8 py-5 md:py-6"
             >
               <a
-                href="/cv.pdf"
-                download
+                href="https://drive.google.com/file/d/1QVud8QtoGRJVPlzQokW9c3f35DesGiqZ/view?usp=sharing"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center gap-2"
               >
                 <FileText className="w-6 h-6 md:w-7 md:h-7" />
