@@ -161,7 +161,7 @@ export default function Hero() {
                 className="flex items-center gap-2"
               >
                 <FileText className="w-6 h-6 md:w-7 md:h-7" />
-                Descargar CV
+                Ver CV
               </a>
             </Button>
           </motion.div>
