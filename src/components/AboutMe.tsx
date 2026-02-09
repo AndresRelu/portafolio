@@ -29,7 +29,7 @@ export default function AboutMe() {
             <p className="text-slate-300 text-2xl md:text-3xl leading-relaxed text-center md:text-left">
               Soy Jorge <span className="text-purple-500 font-semibold">Andrés</span> López{' '}
               <span className="text-purple-500 font-semibold">Romero</span>, un{' '}
-              <span className="text-purple-400">desarrollador de software</span> de 19 años de{' '}
+              <span className="text-purple-400">desarrollador de software</span> de 20 años de{' '}
               <span className="text-purple-400">Guanajuato, México</span>. Tengo fascinación por el{' '}
               <span className="text-purple-400">desarrollo de software</span>, el{' '}
               <span className="text-purple-400">diseño web</span> y el{' '}
