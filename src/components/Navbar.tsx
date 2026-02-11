@@ -91,7 +91,7 @@ export default function Navbar() {
                   key={item.href}
                   href={item.href}
                   onClick={(e) => scrollToSection(e, item.href)}
-                  className={`px-4 lg:px-5 py-3 rounded-lg text-sm lg:text-base font-medium transition-all duration-300 whitespace-nowrap ${
+                  className={`px-4 lg:px-5 py-3 rounded-lg text-sm lg:text-base font-medium transition-all duration-300 whitespace-nowrap min-w-[80px] lg:min-w-[95px] text-center ${
                     activeSection === item.href.slice(1)
                       ? 'text-purple-400 bg-purple-500/10'
                       : 'text-slate-300 hover:text-purple-400 hover:bg-slate-800/50'
@@ -112,14 +112,17 @@ export default function Navbar() {
               </div>
             </div>
 
-            {/* Botón menú hamburguesa - Móvil */}
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden p-2 text-slate-300 hover:text-purple-400 transition-colors"
-              aria-label="Toggle menu"
-            >
-              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
+            {/* Botón de idioma y menú hamburguesa - Móvil */}
+            <div className="md:hidden flex items-center gap-3">
+              <LanguageSwitch />
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="p-2 text-slate-300 hover:text-purple-400 transition-colors"
+                aria-label="Toggle menu"
+              >
+                {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              </button>
+            </div>
           </div>
         </div>
       </motion.nav>
@@ -177,9 +180,6 @@ export default function Navbar() {
                       {item.name}
                     </a>
                   ))}
-                  <div className="px-4 py-3">
-                    <LanguageSwitch />
-                  </div>
                 </div>
               </div>
             </motion.div>

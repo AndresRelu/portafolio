@@ -70,7 +70,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.6 }}
-          className="text-base sm:text-lg md:text-xl text-slate-200 mb-8 sm:mb-10"
+          className="text-base sm:text-lg md:text-xl text-slate-200 mb-8 sm:mb-10 min-h-[1.75rem] sm:min-h-[2rem] md:min-h-[2.25rem]"
         >
           <AnimatePresence mode="wait">
             <motion.span
@@ -93,7 +93,7 @@ export default function Hero() {
           transition={{ delay: 0.5, duration: 0.6 }}
           className="mb-8 sm:mb-10 md:mb-12"
         >
-          <Card className="p-6 md:p-8 bg-slate-900/50 border-slate-700/50 backdrop-blur-sm hover:border-purple-500/30 transition-all duration-300">
+          <Card className="p-6 md:p-8 bg-slate-900/50 border-slate-700/50 backdrop-blur-sm hover:border-purple-500/30 transition-all duration-300 min-h-[200px] sm:min-h-[180px] md:min-h-[200px] lg:min-h-[220px]">
             <AnimatePresence mode="wait">
               <motion.p
                 key={language}
@@ -175,7 +175,7 @@ export default function Hero() {
                 className="flex items-center gap-2"
               >
                 <FileText className="w-6 h-6 md:w-7 md:h-7" />
-                {t.viewCV[language]}
+                <span className="min-w-[60px] text-center">{t.viewCV[language]}</span>
               </a>
             </Button>
           </motion.div>

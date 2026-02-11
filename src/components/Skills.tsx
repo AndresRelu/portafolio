@@ -66,7 +66,7 @@ export default function Skills() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-4xl md:text-5xl font-bold text-center"
+          className="text-4xl md:text-5xl font-bold text-center min-h-[2.75rem] md:min-h-[3.25rem]"
         >
           <AnimatePresence mode="wait">
             <motion.span

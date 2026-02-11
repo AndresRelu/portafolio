@@ -17,7 +17,7 @@ export default function AboutMe() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-4xl md:text-5xl font-bold text-center"
+          className="text-4xl md:text-5xl font-bold text-center min-h-[2.75rem] md:min-h-[3.25rem]"
         >
           <AnimatePresence mode="wait">
             <motion.span
@@ -39,7 +39,7 @@ export default function AboutMe() {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <Card className="p-8 md:p-12 bg-slate-900/50 border-slate-700/50 backdrop-blur-sm hover:border-purple-500/30 transition-all duration-300">
+          <Card className="p-8 md:p-12 bg-slate-900/50 border-slate-700/50 backdrop-blur-sm hover:border-purple-500/30 transition-all duration-300 min-h-[180px] sm:min-h-[160px] md:min-h-[200px]">
             <AnimatePresence mode="wait">
               <motion.p
                 key={language}

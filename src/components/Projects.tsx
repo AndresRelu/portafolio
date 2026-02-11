@@ -151,32 +151,36 @@ function ProjectCard({ project }: { project: Project }) {
               </h3>
               
               {/* Subtítulo */}
-              <AnimatePresence mode="wait">
-                <motion.p
-                  key={language}
-                  initial={{ opacity: 0, filter: 'blur(4px)' }}
-                  animate={{ opacity: 1, filter: 'blur(0px)' }}
-                  exit={{ opacity: 0, filter: 'blur(4px)' }}
-                  transition={{ duration: 0.3 }}
-                  className="text-purple-400 font-semibold mb-4 text-sm sm:text-base"
+              <div className="min-h-[1.5rem] sm:min-h-[1.75rem] mb-4">
+                <AnimatePresence mode="wait">
+                  <motion.p
+                    key={language}
+                    initial={{ opacity: 0, filter: 'blur(4px)' }}
+                    animate={{ opacity: 1, filter: 'blur(0px)' }}
+                    exit={{ opacity: 0, filter: 'blur(4px)' }}
+                    transition={{ duration: 0.3 }}
+                    className="text-purple-400 font-semibold text-sm sm:text-base"
                 >
-                  {t.items[project.subtitleKey].subtitle[language]}
-                </motion.p>
-              </AnimatePresence>
+                    {t.items[project.subtitleKey].subtitle[language]}
+                  </motion.p>
+                </AnimatePresence>
+              </div>
 
               {/* Descripción */}
-              <AnimatePresence mode="wait">
-                <motion.p
-                  key={language}
-                  initial={{ opacity: 0, filter: 'blur(4px)' }}
-                  animate={{ opacity: 1, filter: 'blur(0px)' }}
-                  exit={{ opacity: 0, filter: 'blur(4px)' }}
-                  transition={{ duration: 0.3 }}
-                  className="text-slate-300 leading-relaxed mb-6 text-sm sm:text-base"
+              <div className="min-h-[120px] sm:min-h-[100px] mb-6">
+                <AnimatePresence mode="wait">
+                  <motion.p
+                    key={language}
+                    initial={{ opacity: 0, filter: 'blur(4px)' }}
+                    animate={{ opacity: 1, filter: 'blur(0px)' }}
+                    exit={{ opacity: 0, filter: 'blur(4px)' }}
+                    transition={{ duration: 0.3 }}
+                    className="text-slate-300 leading-relaxed text-sm sm:text-base"
                 >
-                  {t.items[project.descriptionKey].description[language]}
-                </motion.p>
-              </AnimatePresence>
+                    {t.items[project.descriptionKey].description[language]}
+                  </motion.p>
+                </AnimatePresence>
+              </div>
 
               {/* Stack Tecnológico */}
               <div className="mb-6">
@@ -262,7 +266,7 @@ function ProjectCard({ project }: { project: Project }) {
                       className="flex items-center justify-center gap-2"
                     >
                       <ExternalLink className="w-5 h-5" />
-                      {t.watchVideo[language]}
+                      <span className="min-w-[160px] text-center">{t.watchVideo[language]}</span>
                     </a>
                   </Button>
                 </motion.div>
@@ -280,7 +284,7 @@ function ProjectCard({ project }: { project: Project }) {
                     className="w-full bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 transition-all"
                   >
                     <ImageIcon className="w-5 h-5 mr-2" />
-                    {showImages ? t.hidePhotos[language] : t.viewPhotos[language]}
+                    <span className="min-w-[100px] text-center">{showImages ? t.hidePhotos[language] : t.viewPhotos[language]}</span>
                   </Button>
                 </motion.div>
               )}
@@ -391,7 +395,7 @@ export default function Projects() {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-12 sm:mb-16"
+          className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-12 sm:mb-16 min-h-[2.5rem] sm:min-h-[2.75rem] md:min-h-[3.25rem]"
         >
           <AnimatePresence mode="wait">
             <motion.span

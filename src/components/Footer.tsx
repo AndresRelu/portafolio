@@ -21,34 +21,38 @@ export default function Footer() {
             <h3 className="text-3xl md:text-4xl font-bold text-white">
               Andrés Romero
             </h3>
-            <AnimatePresence mode="wait">
-              <motion.p
-                key={language}
-                initial={{ opacity: 0, y: 6, filter: 'blur(4px)' }}
-                animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                exit={{ opacity: 0, y: -6, filter: 'blur(4px)' }}
-                transition={{ duration: 0.3 }}
-                className="text-slate-400 text-xl md:text-2xl"
-              >
-                {t.role[language]}
-              </motion.p>
-            </AnimatePresence>
+            <div className="min-h-[1.75rem] md:min-h-[2rem]">
+              <AnimatePresence mode="wait">
+                <motion.p
+                  key={language}
+                  initial={{ opacity: 0, y: 6, filter: 'blur(4px)' }}
+                  animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                  exit={{ opacity: 0, y: -6, filter: 'blur(4px)' }}
+                  transition={{ duration: 0.3 }}
+                  className="text-slate-400 text-xl md:text-2xl"
+                >
+                  {t.role[language]}
+                </motion.p>
+              </AnimatePresence>
+            </div>
           </div>
 
           {/* Contáctame */}
           <div className="text-center space-y-6">
-            <AnimatePresence mode="wait">
-              <motion.p
-                key={language}
-                initial={{ opacity: 0, y: 6, filter: 'blur(4px)' }}
-                animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                exit={{ opacity: 0, y: -6, filter: 'blur(4px)' }}
-                transition={{ duration: 0.3 }}
-                className="text-slate-300 font-semibold text-2xl md:text-3xl"
+            <div className="min-h-[2rem] md:min-h-[2.5rem]">
+              <AnimatePresence mode="wait">
+                <motion.p
+                  key={language}
+                  initial={{ opacity: 0, y: 6, filter: 'blur(4px)' }}
+                  animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                  exit={{ opacity: 0, y: -6, filter: 'blur(4px)' }}
+                  transition={{ duration: 0.3 }}
+                  className="text-slate-300 font-semibold text-2xl md:text-3xl"
               >
                 {t.contact[language]}
-              </motion.p>
-            </AnimatePresence>
+                </motion.p>
+              </AnimatePresence>
+            </div>
             
             {/* Links Sociales */}
             <div className="flex justify-center items-center gap-8">
