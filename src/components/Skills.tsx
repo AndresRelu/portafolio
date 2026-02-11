@@ -66,20 +66,23 @@ export default function Skills() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-4xl md:text-5xl font-bold text-center min-h-[2.75rem] md:min-h-[3.25rem]"
+          className="text-4xl md:text-5xl font-bold text-center"
         >
-          <AnimatePresence mode="wait">
-            <motion.span
-              key={language}
-              initial={{ opacity: 0, y: 6, filter: 'blur(4px)' }}
-              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-              exit={{ opacity: 0, y: -6, filter: 'blur(4px)' }}
-              transition={{ duration: 0.3 }}
-              className="inline-block text-transparent bg-gradient-to-r from-purple-500 via-purple-400 to-blue-400 bg-clip-text"
-            >
-              {t.title[language]}
-            </motion.span>
-          </AnimatePresence>
+          <span className="grid [&>*]:col-start-1 [&>*]:row-start-1 justify-items-center">
+            <span className="invisible" aria-hidden="true">{t.title.es}</span>
+            <AnimatePresence mode="wait">
+              <motion.span
+                key={language}
+                initial={{ opacity: 0, y: 6, filter: 'blur(4px)' }}
+                animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                exit={{ opacity: 0, y: -6, filter: 'blur(4px)' }}
+                transition={{ duration: 0.3 }}
+                className="inline-block text-transparent bg-gradient-to-r from-purple-500 via-purple-400 to-blue-400 bg-clip-text"
+              >
+                {t.title[language]}
+              </motion.span>
+            </AnimatePresence>
+          </span>
         </motion.h2>
 
         <TooltipProvider>

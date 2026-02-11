@@ -151,7 +151,10 @@ function ProjectCard({ project }: { project: Project }) {
               </h3>
               
               {/* Subtítulo */}
-              <div className="min-h-[1.5rem] sm:min-h-[1.75rem] mb-4">
+              <div className="grid [&>*]:col-start-1 [&>*]:row-start-1 mb-4">
+                <p className="invisible text-sm sm:text-base font-semibold" aria-hidden="true">
+                  {t.items[project.subtitleKey].subtitle.es}
+                </p>
                 <AnimatePresence mode="wait">
                   <motion.p
                     key={language}
@@ -160,14 +163,17 @@ function ProjectCard({ project }: { project: Project }) {
                     exit={{ opacity: 0, filter: 'blur(4px)' }}
                     transition={{ duration: 0.3 }}
                     className="text-purple-400 font-semibold text-sm sm:text-base"
-                >
+                  >
                     {t.items[project.subtitleKey].subtitle[language]}
                   </motion.p>
                 </AnimatePresence>
               </div>
 
               {/* Descripción */}
-              <div className="min-h-[120px] sm:min-h-[100px] mb-6">
+              <div className="grid [&>*]:col-start-1 [&>*]:row-start-1 mb-6">
+                <p className="invisible leading-relaxed text-sm sm:text-base" aria-hidden="true">
+                  {t.items[project.descriptionKey].description.es}
+                </p>
                 <AnimatePresence mode="wait">
                   <motion.p
                     key={language}
@@ -176,7 +182,7 @@ function ProjectCard({ project }: { project: Project }) {
                     exit={{ opacity: 0, filter: 'blur(4px)' }}
                     transition={{ duration: 0.3 }}
                     className="text-slate-300 leading-relaxed text-sm sm:text-base"
-                >
+                  >
                     {t.items[project.descriptionKey].description[language]}
                   </motion.p>
                 </AnimatePresence>
@@ -395,20 +401,23 @@ export default function Projects() {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-12 sm:mb-16 min-h-[2.5rem] sm:min-h-[2.75rem] md:min-h-[3.25rem]"
+          className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-12 sm:mb-16"
         >
-          <AnimatePresence mode="wait">
-            <motion.span
-              key={language}
-              initial={{ opacity: 0, y: 6, filter: 'blur(4px)' }}
-              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-              exit={{ opacity: 0, y: -6, filter: 'blur(4px)' }}
-              transition={{ duration: 0.3 }}
-              className="inline-block text-transparent bg-gradient-to-r from-purple-500 via-purple-400 to-blue-400 bg-clip-text"
-            >
-              {t.title[language]}
-            </motion.span>
-          </AnimatePresence>
+          <span className="grid [&>*]:col-start-1 [&>*]:row-start-1 justify-items-center">
+            <span className="invisible" aria-hidden="true">{t.title.es}</span>
+            <AnimatePresence mode="wait">
+              <motion.span
+                key={language}
+                initial={{ opacity: 0, y: 6, filter: 'blur(4px)' }}
+                animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                exit={{ opacity: 0, y: -6, filter: 'blur(4px)' }}
+                transition={{ duration: 0.3 }}
+                className="inline-block text-transparent bg-gradient-to-r from-purple-500 via-purple-400 to-blue-400 bg-clip-text"
+              >
+                {t.title[language]}
+              </motion.span>
+            </AnimatePresence>
+          </span>
         </motion.h2>
 
         {/* Lista de Proyectos */}

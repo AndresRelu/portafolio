@@ -21,7 +21,8 @@ export default function Footer() {
             <h3 className="text-3xl md:text-4xl font-bold text-white">
               Andrés Romero
             </h3>
-            <div className="min-h-[1.75rem] md:min-h-[2rem]">
+            <div className="grid [&>*]:col-start-1 [&>*]:row-start-1 justify-items-center">
+              <p className="invisible text-xl md:text-2xl" aria-hidden="true">{t.role.es}</p>
               <AnimatePresence mode="wait">
                 <motion.p
                   key={language}
@@ -39,7 +40,8 @@ export default function Footer() {
 
           {/* Contáctame */}
           <div className="text-center space-y-6">
-            <div className="min-h-[2rem] md:min-h-[2.5rem]">
+            <div className="grid [&>*]:col-start-1 [&>*]:row-start-1 justify-items-center">
+              <p className="invisible font-semibold text-2xl md:text-3xl" aria-hidden="true">{t.contact.es}</p>
               <AnimatePresence mode="wait">
                 <motion.p
                   key={language}
@@ -48,8 +50,8 @@ export default function Footer() {
                   exit={{ opacity: 0, y: -6, filter: 'blur(4px)' }}
                   transition={{ duration: 0.3 }}
                   className="text-slate-300 font-semibold text-2xl md:text-3xl"
-              >
-                {t.contact[language]}
+                >
+                  {t.contact[language]}
                 </motion.p>
               </AnimatePresence>
             </div>

@@ -70,20 +70,23 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.6 }}
-          className="text-base sm:text-lg md:text-xl text-slate-200 mb-8 sm:mb-10 min-h-[1.75rem] sm:min-h-[2rem] md:min-h-[2.25rem]"
+          className="text-base sm:text-lg md:text-xl text-slate-200 mb-8 sm:mb-10"
         >
-          <AnimatePresence mode="wait">
-            <motion.span
-              key={language}
-              initial={{ opacity: 0, y: 6, filter: 'blur(4px)' }}
-              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-              exit={{ opacity: 0, y: -6, filter: 'blur(4px)' }}
-              transition={{ duration: 0.3 }}
-              className="inline-block font-bold text-transparent bg-gradient-to-r from-purple-500 via-purple-400 to-blue-400 bg-clip-text"
-            >
-              {t.subtitle[language]}
-            </motion.span>
-          </AnimatePresence>
+          <span className="grid [&>*]:col-start-1 [&>*]:row-start-1 justify-items-center">
+            <span className="invisible font-bold" aria-hidden="true">{t.subtitle.es}</span>
+            <AnimatePresence mode="wait">
+              <motion.span
+                key={language}
+                initial={{ opacity: 0, y: 6, filter: 'blur(4px)' }}
+                animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                exit={{ opacity: 0, y: -6, filter: 'blur(4px)' }}
+                transition={{ duration: 0.3 }}
+                className="inline-block font-bold text-transparent bg-gradient-to-r from-purple-500 via-purple-400 to-blue-400 bg-clip-text"
+              >
+                {t.subtitle[language]}
+              </motion.span>
+            </AnimatePresence>
+          </span>
         </motion.p>
 
         {/* Descripción en Card */}
@@ -93,19 +96,24 @@ export default function Hero() {
           transition={{ delay: 0.5, duration: 0.6 }}
           className="mb-8 sm:mb-10 md:mb-12"
         >
-          <Card className="p-6 md:p-8 bg-slate-900/50 border-slate-700/50 backdrop-blur-sm hover:border-purple-500/30 transition-all duration-300 min-h-[200px] sm:min-h-[180px] md:min-h-[200px] lg:min-h-[220px]">
-            <AnimatePresence mode="wait">
-              <motion.p
-                key={language}
-                initial={{ opacity: 0, y: 6, filter: 'blur(4px)' }}
-                animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                exit={{ opacity: 0, y: -6, filter: 'blur(4px)' }}
-                transition={{ duration: 0.3 }}
-                className="text-slate-300 text-lg md:text-xl lg:text-2xl leading-relaxed"
-              >
-                {t.description[language]}
-              </motion.p>
-            </AnimatePresence>
+          <Card className="p-6 md:p-8 bg-slate-900/50 border-slate-700/50 backdrop-blur-sm hover:border-purple-500/30 transition-all duration-300">
+            <div className="grid [&>*]:col-start-1 [&>*]:row-start-1">
+              <p className="invisible text-lg md:text-xl lg:text-2xl leading-relaxed" aria-hidden="true">
+                {t.description.es}
+              </p>
+              <AnimatePresence mode="wait">
+                <motion.p
+                  key={language}
+                  initial={{ opacity: 0, y: 6, filter: 'blur(4px)' }}
+                  animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                  exit={{ opacity: 0, y: -6, filter: 'blur(4px)' }}
+                  transition={{ duration: 0.3 }}
+                  className="text-slate-300 text-lg md:text-xl lg:text-2xl leading-relaxed"
+                >
+                  {t.description[language]}
+                </motion.p>
+              </AnimatePresence>
+            </div>
           </Card>
         </motion.div>
 
