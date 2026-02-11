@@ -4,11 +4,12 @@ import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import { useInView } from 'react-intersection-observer'
 import { Card } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { ExternalLink, ImageIcon, X, ChevronLeft, ChevronRight } from 'lucide-react'
 import { useState } from 'react'
 import { getAssetPath } from '@/lib/assetPrefix'
+import { useLanguage } from '@/context/LanguageContext'
+import { translations } from '@/lib/translations'
 
 const technologies = [
   { name: 'JavaScript', logo: getAssetPath('/logos/javascript.svg') },
@@ -25,13 +26,13 @@ const technologies = [
 
 interface ProjectImage {
   src: string
-  alt: string
+  alt: { en: string; es: string }
 }
 
 interface Project {
   title: string
-  subtitle: string
-  description: string
+  subtitleKey: number
+  descriptionKey: number
   image: string
   technologies: string[]
   videoUrl?: string
@@ -42,8 +43,8 @@ interface Project {
 const projects: Project[] = [
   {
     title: 'AlineaDent',
-    subtitle: 'Dental Clinic Management System',
-    description: 'Sistema integral de gestión para clínicas dentales desarrollado con Next.js y Python/FastAPI. Administra pacientes, citas y tratamientos dentales con calendario visual, comunicación integrada de WhatsApp, monitoreo de conversaciones con IA y generación automática de reportes. Cuenta con diseño responsivo adaptable a cualquier dispositivo.',
+    subtitleKey: 0,
+    descriptionKey: 0,
     image: getAssetPath('/img/alineadent.jpeg'),
     technologies: ['JavaScript', 'HTML', 'CSS', 'Tailwind CSS', 'Next.js', 'Python', 'FastAPI', 'PostgreSQL'],
     videoUrl: 'https://drive.google.com/file/d/1z6yksLOkjBW50mauP8OHpfmqBcF_Z063/view',
@@ -51,13 +52,13 @@ const projects: Project[] = [
   },
   {
     title: 'Work Orders Management System - Atta Montacargas',
-    subtitle: 'Mobile & Web Application for Work Order Management',
-    description: 'Mobile application for work order management developed with React Native and FastAPI. It includes user role management, work order creation and tracking, automatic PDF generation, a real-time metrics dashboard, and a complete status management system.',
+    subtitleKey: 1,
+    descriptionKey: 1,
     image: getAssetPath('/img/attaprofilepicture.png'),
     technologies: ['JavaScript', 'HTML', 'CSS', 'React', 'Python', 'FastAPI'],
     images: [
-      { src: getAssetPath('/img/attamontacargas-sistema-foto1.png'), alt: 'Panel de gestión de órdenes' },
-      { src: getAssetPath('/img/attamontacargas-sistema-foto2.png'), alt: 'Generación de reportes PDF' }
+      { src: getAssetPath('/img/attamontacargas-sistema-foto1.png'), alt: { en: 'Order management panel', es: 'Panel de gestión de órdenes' } },
+      { src: getAssetPath('/img/attamontacargas-sistema-foto2.png'), alt: { en: 'PDF report generation', es: 'Generación de reportes PDF' } }
     ],
     category: 'Full-Stack'
   }
@@ -79,6 +80,8 @@ const itemVariant = {
 }
 
 function ProjectCard({ project }: { project: Project }) {
+  const { language } = useLanguage()
+  const t = translations.projects
   const [showImages, setShowImages] = useState(false)
   const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null)
   const [ref, inView] = useInView({
@@ -148,19 +151,37 @@ function ProjectCard({ project }: { project: Project }) {
               </h3>
               
               {/* Subtítulo */}
-              <p className="text-purple-400 font-semibold mb-4 text-sm sm:text-base">
-                {project.subtitle}
-              </p>
+              <AnimatePresence mode="wait">
+                <motion.p
+                  key={language}
+                  initial={{ opacity: 0, filter: 'blur(4px)' }}
+                  animate={{ opacity: 1, filter: 'blur(0px)' }}
+                  exit={{ opacity: 0, filter: 'blur(4px)' }}
+                  transition={{ duration: 0.3 }}
+                  className="text-purple-400 font-semibold mb-4 text-sm sm:text-base"
+                >
+                  {t.items[project.subtitleKey].subtitle[language]}
+                </motion.p>
+              </AnimatePresence>
 
               {/* Descripción */}
-              <p className="text-slate-300 leading-relaxed mb-6 text-sm sm:text-base">
-                {project.description}
-              </p>
+              <AnimatePresence mode="wait">
+                <motion.p
+                  key={language}
+                  initial={{ opacity: 0, filter: 'blur(4px)' }}
+                  animate={{ opacity: 1, filter: 'blur(0px)' }}
+                  exit={{ opacity: 0, filter: 'blur(4px)' }}
+                  transition={{ duration: 0.3 }}
+                  className="text-slate-300 leading-relaxed mb-6 text-sm sm:text-base"
+                >
+                  {t.items[project.descriptionKey].description[language]}
+                </motion.p>
+              </AnimatePresence>
 
               {/* Stack Tecnológico */}
               <div className="mb-6">
                 <p className="text-slate-400 text-sm font-semibold mb-3">
-                  Stack Tecnológico:
+                  {t.techStack[language]}
                 </p>
                 <motion.div
                   variants={containerVariant}
@@ -204,7 +225,7 @@ function ProjectCard({ project }: { project: Project }) {
                         <div className="relative h-48 sm:h-56 overflow-hidden rounded-lg border border-slate-700 hover:border-purple-500/50 transition-all">
                           <Image
                             src={img.src}
-                            alt={img.alt}
+                            alt={img.alt[language]}
                             fill
                             className="object-cover group-hover:scale-105 transition-transform duration-300"
                             sizes="(max-width: 640px) 100vw, 50vw"
@@ -213,7 +234,7 @@ function ProjectCard({ project }: { project: Project }) {
                             <ImageIcon className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                           </div>
                         </div>
-                        <p className="text-slate-400 text-xs mt-2 text-center">{img.alt}</p>
+                        <p className="text-slate-400 text-xs mt-2 text-center">{img.alt[language]}</p>
                       </div>
                     ))}
                   </div>
@@ -241,7 +262,7 @@ function ProjectCard({ project }: { project: Project }) {
                       className="flex items-center justify-center gap-2"
                     >
                       <ExternalLink className="w-5 h-5" />
-                      Ver video de funcionamiento
+                      {t.watchVideo[language]}
                     </a>
                   </Button>
                 </motion.div>
@@ -259,7 +280,7 @@ function ProjectCard({ project }: { project: Project }) {
                     className="w-full bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 transition-all"
                   >
                     <ImageIcon className="w-5 h-5 mr-2" />
-                    {showImages ? 'Ocultar fotos' : 'Ver fotos'}
+                    {showImages ? t.hidePhotos[language] : t.viewPhotos[language]}
                   </Button>
                 </motion.div>
               )}
@@ -316,7 +337,7 @@ function ProjectCard({ project }: { project: Project }) {
               <div className="relative w-full h-full">
                 <Image
                   src={project.images[selectedImageIndex].src}
-                  alt={project.images[selectedImageIndex].alt}
+                  alt={project.images[selectedImageIndex].alt[language]}
                   fill
                   className="object-contain"
                   sizes="100vw"
@@ -326,7 +347,7 @@ function ProjectCard({ project }: { project: Project }) {
               {/* Caption */}
               <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
                 <p className="text-white text-center text-lg">
-                  {project.images[selectedImageIndex].alt}
+                  {project.images[selectedImageIndex].alt[language]}
                 </p>
                 <p className="text-slate-300 text-center text-sm mt-1">
                   {selectedImageIndex + 1} / {project.images.length}
@@ -355,6 +376,8 @@ function ProjectCard({ project }: { project: Project }) {
 }
 
 export default function Projects() {
+  const { language } = useLanguage()
+  const t = translations.projects
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -370,9 +393,18 @@ export default function Projects() {
           transition={{ duration: 0.6 }}
           className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-12 sm:mb-16"
         >
-          <span className="text-transparent bg-gradient-to-r from-purple-500 via-purple-400 to-blue-400 bg-clip-text">
-            Experiencia y Proyectos
-          </span>
+          <AnimatePresence mode="wait">
+            <motion.span
+              key={language}
+              initial={{ opacity: 0, y: 6, filter: 'blur(4px)' }}
+              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              exit={{ opacity: 0, y: -6, filter: 'blur(4px)' }}
+              transition={{ duration: 0.3 }}
+              className="inline-block text-transparent bg-gradient-to-r from-purple-500 via-purple-400 to-blue-400 bg-clip-text"
+            >
+              {t.title[language]}
+            </motion.span>
+          </AnimatePresence>
         </motion.h2>
 
         {/* Lista de Proyectos */}

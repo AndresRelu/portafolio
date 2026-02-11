@@ -1,21 +1,26 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Github, Mail, FileText } from 'lucide-react'
 import { toast } from 'sonner'
 import { getAssetPath } from '@/lib/assetPrefix'
+import { useLanguage } from '@/context/LanguageContext'
+import { translations } from '@/lib/translations'
 
 export default function Hero() {
+  const { language } = useLanguage()
+  const t = translations.hero
+
   const copyEmail = async () => {
     const email = 'andres.romero.vired@gmail.com'
     await navigator.clipboard.writeText(email)
-    toast.success('andres.romero.vired@gmail.com copiado', {
-      description: 'El correo ha sido copiado al portapapeles',
+    toast.success(t.toast.title[language], {
+      description: t.toast.description[language],
       style: {
-        color: '#9333ea', // morado para el título
+        color: '#9333ea',
       },
       descriptionClassName: '!text-black',
     })
@@ -67,9 +72,18 @@ export default function Hero() {
           transition={{ delay: 0.4, duration: 0.6 }}
           className="text-base sm:text-lg md:text-xl text-slate-200 mb-8 sm:mb-10"
         >
-          <span className="font-bold text-transparent bg-gradient-to-r from-purple-500 via-purple-400 to-blue-400 bg-clip-text">
-            Desarrollador de software
-          </span>
+          <AnimatePresence mode="wait">
+            <motion.span
+              key={language}
+              initial={{ opacity: 0, y: 6, filter: 'blur(4px)' }}
+              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              exit={{ opacity: 0, y: -6, filter: 'blur(4px)' }}
+              transition={{ duration: 0.3 }}
+              className="inline-block font-bold text-transparent bg-gradient-to-r from-purple-500 via-purple-400 to-blue-400 bg-clip-text"
+            >
+              {t.subtitle[language]}
+            </motion.span>
+          </AnimatePresence>
         </motion.p>
 
         {/* Descripción en Card */}
@@ -80,18 +94,18 @@ export default function Hero() {
           className="mb-8 sm:mb-10 md:mb-12"
         >
           <Card className="p-6 md:p-8 bg-slate-900/50 border-slate-700/50 backdrop-blur-sm hover:border-purple-500/30 transition-all duration-300">
-            <p className="text-slate-300 text-lg md:text-xl lg:text-2xl leading-relaxed">
-              Soy de <span className="text-purple-500 font-semibold">Guanajuato, México</span>. Me especializo en el{' '}
-              <span className="text-purple-400">desarrollo de software</span> y en el{' '}
-              <span className="text-purple-400">diseño web</span>, creando aplicaciones{' '}
-              <span className="text-purple-400">modernas</span>,{' '}
-              <span className="text-purple-400">funcionales</span> y pensadas para{' '}
-              <span className="text-purple-400">escalar</span>. Trabajo con{' '}
-              <span className="text-purple-400">buenas prácticas de ingeniería</span> para construir sistemas{' '}
-              <span className="text-purple-400">confiables</span> y{' '}
-              <span className="text-purple-400">bien estructurados</span>. Además, tengo experiencia en{' '}
-              <span className="text-purple-500 font-semibold">machine learning</span> como un valor extra que puedo integrar cuando un proyecto lo requiere.
-            </p>
+            <AnimatePresence mode="wait">
+              <motion.p
+                key={language}
+                initial={{ opacity: 0, y: 6, filter: 'blur(4px)' }}
+                animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                exit={{ opacity: 0, y: -6, filter: 'blur(4px)' }}
+                transition={{ duration: 0.3 }}
+                className="text-slate-300 text-lg md:text-xl lg:text-2xl leading-relaxed"
+              >
+                {t.description[language]}
+              </motion.p>
+            </AnimatePresence>
           </Card>
         </motion.div>
 
@@ -142,7 +156,7 @@ export default function Hero() {
             </Button>
           </motion.div>
 
-          {/* Botón Descargar CV */}
+          {/* Botón Ver CV */}
           <motion.div
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -161,7 +175,7 @@ export default function Hero() {
                 className="flex items-center gap-2"
               >
                 <FileText className="w-6 h-6 md:w-7 md:h-7" />
-                Ver CV
+                {t.viewCV[language]}
               </a>
             </Button>
           </motion.div>

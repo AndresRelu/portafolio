@@ -1,10 +1,15 @@
 'use client'
 
 import { Separator } from '@/components/ui/separator'
-import { Button } from '@/components/ui/button'
 import { Github, Instagram, Facebook } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { useLanguage } from '@/context/LanguageContext'
+import { translations } from '@/lib/translations'
 
 export default function Footer() {
+  const { language } = useLanguage()
+  const t = translations.footer
+
   return (
     <footer id="contacto" className="py-16 px-6">
       <div className="max-w-6xl mx-auto">
@@ -16,16 +21,34 @@ export default function Footer() {
             <h3 className="text-3xl md:text-4xl font-bold text-white">
               Andrés Romero
             </h3>
-            <p className="text-slate-400 text-xl md:text-2xl">
-              Desarrollador de software
-            </p>
+            <AnimatePresence mode="wait">
+              <motion.p
+                key={language}
+                initial={{ opacity: 0, y: 6, filter: 'blur(4px)' }}
+                animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                exit={{ opacity: 0, y: -6, filter: 'blur(4px)' }}
+                transition={{ duration: 0.3 }}
+                className="text-slate-400 text-xl md:text-2xl"
+              >
+                {t.role[language]}
+              </motion.p>
+            </AnimatePresence>
           </div>
 
           {/* Contáctame */}
           <div className="text-center space-y-6">
-            <p className="text-slate-300 font-semibold text-2xl md:text-3xl">
-              Contáctame
-            </p>
+            <AnimatePresence mode="wait">
+              <motion.p
+                key={language}
+                initial={{ opacity: 0, y: 6, filter: 'blur(4px)' }}
+                animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                exit={{ opacity: 0, y: -6, filter: 'blur(4px)' }}
+                transition={{ duration: 0.3 }}
+                className="text-slate-300 font-semibold text-2xl md:text-3xl"
+              >
+                {t.contact[language]}
+              </motion.p>
+            </AnimatePresence>
             
             {/* Links Sociales */}
             <div className="flex justify-center items-center gap-8">

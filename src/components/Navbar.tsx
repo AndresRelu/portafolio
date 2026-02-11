@@ -3,19 +3,20 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState, useEffect } from 'react'
 import { Menu, X } from 'lucide-react'
-
-const navItems = [
-  { name: 'Inicio', href: '#hero' },
-  { name: 'Proyectos', href: '#proyectos' },
-  { name: 'Habilidades', href: '#habilidades' },
-  { name: 'Sobre mí', href: '#sobre-mi' },
-  { name: 'Contacto', href: '#contacto' },
-]
+import { useLanguage } from '@/context/LanguageContext'
+import { translations } from '@/lib/translations'
+import LanguageSwitch from './LanguageSwitch'
 
 export default function Navbar() {
+  const { language } = useLanguage()
   const [activeSection, setActiveSection] = useState('hero')
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+
+  const navItems = translations.nav.items.map((item) => ({
+    name: item[language],
+    href: item.href,
+  }))
 
   useEffect(() => {
     const handleScroll = () => {
@@ -39,6 +40,7 @@ export default function Navbar() {
 
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -86,7 +88,7 @@ export default function Navbar() {
             <div className="hidden md:flex items-center gap-1 lg:gap-2">
               {navItems.map((item) => (
                 <a
-                  key={item.name}
+                  key={item.href}
                   href={item.href}
                   onClick={(e) => scrollToSection(e, item.href)}
                   className={`px-4 lg:px-5 py-3 rounded-lg text-sm lg:text-base font-medium transition-all duration-300 whitespace-nowrap ${
@@ -95,9 +97,19 @@ export default function Navbar() {
                       : 'text-slate-300 hover:text-purple-400 hover:bg-slate-800/50'
                   }`}
                 >
-                  {item.name}
+                  <motion.span
+                    key={item.name}
+                    initial={{ opacity: 0, y: -4 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.25 }}
+                  >
+                    {item.name}
+                  </motion.span>
                 </a>
               ))}
+              <div className="ml-2">
+                <LanguageSwitch />
+              </div>
             </div>
 
             {/* Botón menú hamburguesa - Móvil */}
@@ -138,7 +150,7 @@ export default function Navbar() {
                 {/* Header del menú */}
                 <div className="flex justify-between items-center p-6 border-b border-slate-800/50">
                   <span className="text-lg font-bold text-transparent bg-gradient-to-r from-purple-500 to-blue-400 bg-clip-text">
-                    Menú
+                    {translations.nav.menu[language]}
                   </span>
                   <button
                     onClick={() => setIsMobileMenuOpen(false)}
@@ -153,7 +165,7 @@ export default function Navbar() {
                 <div className="flex flex-col p-4 gap-2">
                   {navItems.map((item) => (
                     <a
-                      key={item.name}
+                      key={item.href}
                       href={item.href}
                       onClick={(e) => scrollToSection(e, item.href)}
                       className={`px-4 py-3 rounded-lg text-base font-medium transition-all duration-300 ${
@@ -165,6 +177,9 @@ export default function Navbar() {
                       {item.name}
                     </a>
                   ))}
+                  <div className="px-4 py-3">
+                    <LanguageSwitch />
+                  </div>
                 </div>
               </div>
             </motion.div>

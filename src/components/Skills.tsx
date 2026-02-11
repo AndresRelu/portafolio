@@ -8,8 +8,10 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip'
 import Image from 'next/image'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { getAssetPath } from '@/lib/assetPrefix'
+import { useLanguage } from '@/context/LanguageContext'
+import { translations } from '@/lib/translations'
 
 const skills = [
   { name: 'JavaScript', logo: getAssetPath('/logos/javascript.svg') },
@@ -31,6 +33,9 @@ const skills = [
 ]
 
 export default function Skills() {
+  const { language } = useLanguage()
+  const t = translations.skills
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -63,9 +68,18 @@ export default function Skills() {
           transition={{ duration: 0.6 }}
           className="text-4xl md:text-5xl font-bold text-center"
         >
-          <span className="text-transparent bg-gradient-to-r from-purple-500 via-purple-400 to-blue-400 bg-clip-text">
-            Mis habilidades
-          </span>
+          <AnimatePresence mode="wait">
+            <motion.span
+              key={language}
+              initial={{ opacity: 0, y: 6, filter: 'blur(4px)' }}
+              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              exit={{ opacity: 0, y: -6, filter: 'blur(4px)' }}
+              transition={{ duration: 0.3 }}
+              className="inline-block text-transparent bg-gradient-to-r from-purple-500 via-purple-400 to-blue-400 bg-clip-text"
+            >
+              {t.title[language]}
+            </motion.span>
+          </AnimatePresence>
         </motion.h2>
 
         <TooltipProvider>

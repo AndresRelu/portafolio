@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Toaster } from "@/components/ui/sonner";
 import Navbar from "@/components/Navbar";
+import { LanguageProvider } from "@/context/LanguageContext";
 import "./globals.css";
 
 const inter = Inter({
@@ -10,13 +11,13 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Andrés Romero | Desarrollador de Software",
-  description: "Portafolio de Andrés Romero, desarrollador de software especializado en IA y machine learning. Guanajuato, México.",
-  keywords: ["desarrollador", "software", "machine learning", "IA", "Next.js", "React", "Andrés Romero"],
+  title: "Andrés Romero | Software Developer",
+  description: "Portfolio of Andrés Romero, software developer specializing in AI and machine learning. Guanajuato, Mexico.",
+  keywords: ["developer", "software", "machine learning", "AI", "Next.js", "React", "Andrés Romero"],
   authors: [{ name: "Andrés Romero" }],
   openGraph: {
-    title: "Andrés Romero | Desarrollador de Software",
-    description: "Especializado en desarrollo de software y machine learning",
+    title: "Andrés Romero | Software Developer",
+    description: "Specializing in software development and machine learning",
     type: "website",
   },
 };
@@ -27,11 +28,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth">
       <body className={`${inter.variable} antialiased font-sans`}>
-        <Navbar />
-        {children}
-        <Toaster />
+        <LanguageProvider>
+          <Navbar />
+          {children}
+          <Toaster />
+        </LanguageProvider>
       </body>
     </html>
   );
